@@ -2,18 +2,18 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 
 // Initialize Gemini API
 const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-console.log('Gemini: API key loaded:', apiKey ? 'Present' : 'Missing');
-console.log('Gemini: API key value:', apiKey);
 
-if (!apiKey || apiKey === 'your_actual_gemini_api_key_here') {
-  console.warn('Gemini: No valid API key found. Using fallback workouts only.');
+// Validate Gemini API key
+if (!apiKey || apiKey.includes('your_') || apiKey.trim() === '') {
+  console.warn('⚠️ Gemini API key not found or invalid. AI workout generation will be disabled.');
+  console.warn('Please set VITE_GEMINI_API_KEY in your .env file to enable AI features.');
 }
 
-const genAI = apiKey && apiKey !== 'your_actual_gemini_api_key_here' 
+const genAI = apiKey && !apiKey.includes('your_') && apiKey.trim() !== '' 
   ? new GoogleGenerativeAI(apiKey)
   : null;
 
-console.log('Gemini: genAI initialized:', genAI ? 'Success' : 'Failed');
+console.log('🤖 Gemini AI initialized:', genAI ? '✅ Success' : '❌ Disabled (check API key)');
 
 export const geminiService = {
   async generateWorkoutSuggestion(userPreferences, workoutHistory = []) {

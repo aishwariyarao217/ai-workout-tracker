@@ -59,27 +59,52 @@ A modern, AI-powered CrossFit workout tracking application built with React, Fir
    ```
 
 3. **Environment Setup**
+   
+   **Option A: Quick Setup (Recommended)**
+   ```bash
+   npm run setup
+   ```
+   
+   **Option B: Manual Setup**
    ```bash
    cp env.example .env
    ```
    
-   Update your `.env` file with your credentials:
+   Then edit the `.env` file with your actual credentials:
    ```env
-   VITE_FIREBASE_API_KEY=your_firebase_api_key
+   # Firebase Configuration (get from Firebase Console)
+   VITE_FIREBASE_API_KEY=your_actual_firebase_api_key
    VITE_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
    VITE_FIREBASE_PROJECT_ID=your_project_id
    VITE_FIREBASE_STORAGE_BUCKET=your_project.appspot.com
    VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
    VITE_FIREBASE_APP_ID=your_app_id
-   VITE_GEMINI_API_KEY=your_gemini_api_key
+   
+   # Gemini AI Configuration (get from Google AI Studio)
+   VITE_GEMINI_API_KEY=your_actual_gemini_api_key
    ```
 
-4. **Start the development server**
+4. **Get Your Credentials**
+   
+   **Firebase Setup:**
+   - Go to [Firebase Console](https://console.firebase.google.com/)
+   - Create a new project or select existing one
+   - Go to Project Settings > General tab
+   - Scroll to "Your apps" section and add a web app
+   - Copy the config values to your `.env` file
+   
+   **Gemini AI Setup:**
+   - Go to [Google AI Studio](https://aistudio.google.com/)
+   - Click "Get API Key" in the left sidebar
+   - Create a new API key
+   - Copy the key to your `.env` file
+
+5. **Start the development server**
    ```bash
    npm run dev
    ```
 
-5. **Open your browser**
+6. **Open your browser**
    Navigate to `http://localhost:5173` to see the application.
 
 ## 🏗️ Project Structure
@@ -140,10 +165,20 @@ The app uses Google's Gemini AI to generate unique, personalized workouts. Key f
 
 ## 🔒 Security
 
-- Firebase Authentication for secure user management
-- Environment variables for API keys
-- Client-side validation and error handling
-- Secure Firebase rules for data protection
+- **No Hardcoded Credentials**: All sensitive data is stored in environment variables
+- **Environment Validation**: App validates required credentials on startup
+- **Firebase Authentication**: Secure user management with Firebase Auth
+- **Client-side Validation**: Input validation and error handling
+- **Secure Firebase Rules**: Proper Firestore security rules for data protection
+- **Git Ignore**: `.env` files are excluded from version control
+
+### Security Best Practices
+
+1. **Never commit `.env` files** - They're already in `.gitignore`
+2. **Use environment variables** - All credentials are loaded from `.env`
+3. **Validate on startup** - App checks for required credentials
+4. **Rotate API keys** - Regularly update your API keys
+5. **Use Firebase security rules** - Implement proper Firestore rules
 
 ## 🚀 Deployment
 

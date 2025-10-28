@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "setup": "node setup.js",
+    "check-config": "node check-config.js"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
